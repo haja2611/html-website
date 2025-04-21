@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>H & P Technologies</title>
+    <style>
+      /* Reset and base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+
+      /* Navbar styles */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 5%;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #2c3e50;
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: #3498db;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #2c3e50;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #3498db;
+      }
+
+      /* Section styles */
+      section {
+        min-height: 100vh;
+        padding: 8rem 5% 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: #2c3e50;
+        text-align: center;
+      }
+
+      .section-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Home section */
+      #home {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        text-align: center;
+      }
+
+      .hero-text h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        color: #2c3e50;
+      }
+
+      .hero-text p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        color: #7f8c8d;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: #3498db;
+        color: white;
+        padding: 0.8rem 1.8rem;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #2980b9;
+        transform: translateY(-3px);
+      }
+
+      /* About section */
+      #about {
+        background-color: #fff;
+      }
+
+      .about-content {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-image {
+        flex: 1;
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      /* Services section */
+      #services {
+        background-color: #f5f7fa;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .service-card {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+        text-align: center;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-icon {
+        font-size: 3rem;
+        color: #3498db;
+        margin-bottom: 1rem;
+      }
+
+      .service-card h3 {
+        margin-bottom: 1rem;
+        color: #2c3e50;
+      }
+
+      /* Contact section */
+      #contact {
+        background-color: #fff;
+      }
+
+      .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #f9f9f9;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #2c3e50;
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      .form-group textarea {
+        height: 150px;
+        resize: vertical;
+      }
+
+      /* Scroll animation effects */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s, transform 0.8s;
+      }
+
+      .animate-on-scroll.animated {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Footer */
+      footer {
+        background-color: #2c3e50;
+        color: #fff;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: column;
+          padding: 1rem;
+        }
+
+        .nav-links {
+          margin-top: 1rem;
+        }
+
+        .nav-links li {
+          margin-left: 1rem;
+        }
+
+        .hero-text h1 {
+          font-size: 2.5rem;
+        }
+
+        .about-content {
+          flex-direction: column;
+        }
+
+        .about-image {
+          width: 100%;
+          margin-top: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <a href="#" class="logo">Start<span>Up</span></a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+      <div class="section-content">
+        <div class="hero-text animate-on-scroll">
+          <h1>We Build Digital Experiences</h1>
+          <p>
+            Helping startups and businesses grow with cutting-edge digital
+            solutions tailored to your needs.
+          </p>
+          <a href="#contact" class="btn">Get Started</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="section-content">
+        <h2 class="section-title">About Us</h2>
+        <div class="about-content">
+          <div class="about-text animate-on-scroll">
+            <p>
+              We are a passionate team of digital experts dedicated to helping
+              businesses thrive in the online world. With years of experience
+              across various industries, we understand what it takes to create
+              impactful digital presence.
+            </p>
+            <p>
+              Our approach combines creativity, technical expertise, and
+              data-driven strategies to deliver solutions that not only look
+              great but also drive real business results.
+            </p>
+          </div>
+          <div class="about-image animate-on-scroll">
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              alt="Our Team"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+      <div class="section-content">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">📱</div>
+            <h3>Mobile Apps</h3>
+            <p>
+              Custom mobile applications for iOS and Android that engage users
+              and drive business growth.
+            </p>
+          </div>
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">🔍</div>
+            <h3>SEO Services</h3>
+            <p>
+              Comprehensive search engine optimization to improve your
+              visibility and organic traffic.
+            </p>
+          </div>
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">💻</div>
+            <h3>Website Development</h3>
+            <p>
+              Beautiful, responsive websites that convert visitors into
+              customers and showcase your brand.
+            </p>
+          </div>
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">📈</div>
+            <h3>Digital Marketing</h3>
+            <p>
+              Targeted campaigns across social media, email, and PPC to grow
+              your audience and sales.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="section-content">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-form animate-on-scroll">
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 H & P Technologies. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for scroll animations -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+        });
+
+        // Scroll animation trigger
+        const animateElements = document.querySelectorAll(".animate-on-scroll");
+
+        function checkScroll() {
+          animateElements.forEach((element) => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (elementTop < windowHeight - 100) {
+              element.classList.add("animated");
+            }
+          });
+        }
+
+        // Check on initial load
+        checkScroll();
+
+        // Check on scroll
+        window.addEventListener("scroll", checkScroll);
+      });
+    </script>
+  </body>
+</html>
